@@ -4,6 +4,7 @@ import { dataFailure, dataRequest, dataSuccess } from "./app/store/dataSlice";
 import { RootState } from "./app/store/store";
 import React from "react";
 import SingleProperty from "./components/SingleProperty";
+import Header from "./components/Header";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ function App() {
 
   return (
     <div>
+      <Header />
       {dataFromApi.map((property) => (
         <SingleProperty key={property.id} {...property} />
       ))}

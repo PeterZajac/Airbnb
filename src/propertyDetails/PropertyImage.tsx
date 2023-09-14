@@ -10,7 +10,14 @@ const PropertyImage: React.FC<PropertyImageProps> = ({ imagesFromApi }) => {
     original: "https://placehold.co/600x400",
     thumbnail: "https://placehold.co/600x400 ",
   }));
-  return <ImageGallery items={images} />;
+  return (
+    <ImageGallery
+      items={images}
+      showBullets
+      showPlayButton={false}
+      showFullscreenButton={false}
+    />
+  );
 };
 
 export default PropertyImage;
