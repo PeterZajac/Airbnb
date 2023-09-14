@@ -50,7 +50,6 @@ const SingleProperty: React.FC<DataItem> = ({
     <SinglePropertyContainer>
       <PropertyTitle title={title} />
       <PropertyImage imagesFromApi={imagesFromApi} />
-
       <PropertyDescription description={description} />
       <PropertyLocation location={location} />
       <PropertyPrice price={price} />
