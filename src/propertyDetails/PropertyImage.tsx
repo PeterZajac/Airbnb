@@ -7,8 +7,8 @@ type PropertyImageProps = {
 
 const PropertyImage: React.FC<PropertyImageProps> = ({ imagesFromApi }) => {
   const images = (imagesFromApi || []).map((image) => ({
-    original: image,
-    thumbnail: image,
+    original: "https://placehold.co/600x400",
+    thumbnail: "https://placehold.co/600x400 ",
   }));
   return <ImageGallery items={images} />;
 };
