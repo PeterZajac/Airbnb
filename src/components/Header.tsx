@@ -7,7 +7,7 @@ function Header() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary mb-2" sticky="top">
       <Container>
-        <Navbar.Brand href="#home">Ubytko</Navbar.Brand>
+        <Navbar.Brand href="#home">Ubytovanie</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

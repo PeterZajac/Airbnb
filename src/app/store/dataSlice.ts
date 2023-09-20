@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+// slice na properties
 export type DataItem = {
   //všetko sme vybrali z API a otypovali sme si to
   id: number;

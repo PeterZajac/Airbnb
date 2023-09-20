@@ -42,13 +42,14 @@ const SingleProperty: React.FC<DataItem> = ({
   amenities,
   host,
   images,
+  id,
 }) => {
   const imagesFromApi = images.map((image) => image);
 
   return (
     // <Container>
     <SinglePropertyContainer>
-      <PropertyTitle title={title} />
+      <PropertyTitle title={title} route={`/property/${id}`} />
       <PropertyImage imagesFromApi={imagesFromApi} />
       <PropertyDescription description={description} />
       <PropertyLocation location={location} />

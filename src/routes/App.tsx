@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { dataFailure, dataRequest, dataSuccess } from "./app/store/dataSlice";
-import { RootState } from "./app/store/store";
+import { dataFailure, dataRequest, dataSuccess } from "../app/store/dataSlice";
+import { RootState } from "../app/store/store";
 import React from "react";
-import SingleProperty from "./components/SingleProperty";
-import Header from "./components/Header";
+import SingleProperty from "../components/SingleProperty";
+import Header from "../components/Header";
 
 function App() {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ function App() {
     data: dataFromApi,
     loading,
     error,
-  } = useSelector((state: RootState) => state.data);
+  } = useSelector((state: RootState) => state);
 
   useEffect(() => {
     dispatch(dataRequest());
@@ -42,7 +42,7 @@ function App() {
   return (
     <div>
       <Header />
-      {dataFromApi.map((property) => (
+      {dataFromApi.map((property: any) => (
         <SingleProperty key={property.id} {...property} />
       ))}
     </div>
