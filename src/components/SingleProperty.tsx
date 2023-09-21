@@ -15,12 +15,12 @@ import {
 import "react-image-gallery/styles/css/image-gallery.css";
 import styled from "styled-components";
 
-export const SinglePropertyContainer = styled.div`
+export const SinglePropertyContainer = styled.div<{ isDetailPage?: boolean }>`
   border: 1px solid #ddd;
   padding: 2%;
   margin: 1% 1%;
   height: 1150px;
-  width: 30%;
+  width: ${({ isDetailPage }) => (isDetailPage ? "100%" : "30%")}
   box-sizing: border-box;
   display: inline-block;
   vertical-align: top;
@@ -44,13 +44,11 @@ const SingleProperty: React.FC<DataItem> = ({
   images,
   id,
 }) => {
-  const imagesFromApi = images.map((image) => image);
-
   return (
     // <Container>
     <SinglePropertyContainer>
       <PropertyTitle title={title} route={`/property/${id}`} />
-      <PropertyImage imagesFromApi={imagesFromApi} />
+      <PropertyImage imagesFromApi={images} />
       <PropertyDescription description={description} />
       <PropertyLocation location={location} />
       <PropertyPrice price={price} />

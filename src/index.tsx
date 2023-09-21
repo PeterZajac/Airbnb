@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./routes/App";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Provider } from "react-redux";
-import { persistor, store } from "./app/store/store";
-import Property from "./routes/Property";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { PersistGate } from "reduxjs-toolkit-persist/integration/react";
+import { persistor, store } from "./app/store/store";
+import App from "./routes/App";
+import Property from "./routes/Property";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
