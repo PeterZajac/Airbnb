@@ -1,6 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { dataFailure, dataRequest, dataSuccess } from "../app/store/dataSlice";
+import {
+  dataFailure,
+  DataItem,
+  dataRequest,
+  dataSuccess,
+} from "../app/store/dataSlice";
 import { RootState } from "../app/store/store";
 import React from "react";
 import SingleProperty from "../components/SingleProperty";
@@ -42,7 +47,7 @@ function App() {
   return (
     <div>
       <Header />
-      {dataFromApi.map((property: any) => (
+      {dataFromApi.map((property: DataItem) => (
         <SingleProperty key={property.id} {...property} />
       ))}
     </div>

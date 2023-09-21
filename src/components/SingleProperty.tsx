@@ -16,11 +16,11 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import styled from "styled-components";
 
 export const SinglePropertyContainer = styled.div<{ isDetailPage?: boolean }>`
-  border: 1px solid #ddd;
+  border: ${({ isDetailPage }) => (isDetailPage ? "none" : "1px solid #ddd")};
   padding: 2%;
   margin: 1% 1%;
   height: 1150px;
-  width: ${({ isDetailPage }) => (isDetailPage ? "100%" : "30%")}
+  width: ${({ isDetailPage }) => (isDetailPage ? "60%" : "30%")};
   box-sizing: border-box;
   display: inline-block;
   vertical-align: top;
