@@ -10,15 +10,17 @@ import { RootState } from "../app/store/store";
 import React from "react";
 import SingleProperty from "../components/SingleProperty";
 import Header from "../components/Header";
+import { EPaths, useFetch } from "../hooks/useFetch";
 
 function App() {
   const dispatch = useDispatch();
-
   const {
     data: dataFromApi,
     loading,
     error,
   } = useSelector((state: RootState) => state);
+
+  const data = useFetch(EPaths.PROPERTIES);
 
   useEffect(() => {
     dispatch(dataRequest());

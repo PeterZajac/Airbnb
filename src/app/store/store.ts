@@ -1,4 +1,4 @@
-import { createStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "reduxjs-toolkit-persist";
 import storage from "reduxjs-toolkit-persist/lib/storage";
 import dataReducer from "./dataSlice";
@@ -9,8 +9,11 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, dataReducer);
-const store = createStore(persistedReducer);
+const store = configureStore({
+  reducer: persistedReducer,
+});
 const persistor = persistStore(store);
+console.log(persistor);
 
 export { store, persistor };
 
