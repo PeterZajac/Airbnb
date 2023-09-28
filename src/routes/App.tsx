@@ -1,38 +1,17 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  dataFailure,
-  DataItem,
-  dataRequest,
-  dataSuccess,
-} from "../app/store/dataSlice";
-import { RootState } from "../app/store/store";
-import React from "react";
-import SingleProperty from "../components/SingleProperty";
+import { useSelector } from "react-redux";
+import { DataItem, DataState } from "../app/store/dataSlice";
 import Header from "../components/Header";
-import { EPaths, useFetch } from "../hooks/useFetch";
+import SingleProperty from "../components/SingleProperty";
+import { useFetch } from "../hooks/useFetch";
+import { EPaths } from "../types";
 
 function App() {
-  const dispatch = useDispatch();
-  const {
-    data: dataFromApi,
-    loading,
-    error,
-  } = useSelector((state: RootState) => state);
+  const { data, loading, error } = useFetch<DataState<DataItem>>(
+    EPaths.PROPERTIES
+  );
 
-  const data = useFetch(EPaths.PROPERTIES);
-
-  useEffect(() => {
-    dispatch(dataRequest());
-
-    fetch(
-      "https://my-json-server.typicode.com/BeAcademy-s-r-o/booking-api/properties"
-    )
-      .then((response) => response.json())
-      .then((data) => dispatch(dataSuccess(data)))
-      .catch(() => dispatch(dataFailure("Failed to fetch dataaa")));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const state = useSelector((state) => state);
+  console.log(state);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -42,14 +21,14 @@ function App() {
     return <div>Error: {error}</div>;
   }
 
-  if (!dataFromApi?.length) {
+  if (!data?.length) {
     return <div>No data</div>;
   }
 
   return (
     <div>
       <Header />
-      {dataFromApi.map((property: DataItem) => (
+      {data.map((property: DataItem) => (
         <SingleProperty key={property.id} {...property} />
       ))}
     </div>

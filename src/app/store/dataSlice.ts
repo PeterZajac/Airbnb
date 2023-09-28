@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { EPaths } from "../../types";
 // slice na properties
 export type DataItem = {
   //všetko sme vybrali z API a otypovali sme si to
@@ -18,20 +19,20 @@ export type DataItem = {
   };
 };
 
-interface DataState {
-  data?: DataItem[];
+export type DataState<T> = {
+  data: T[];
   loading: boolean;
   error: string | null;
-}
+};
 
-const initialState: DataState = {
+const initialState: DataState<DataItem> = {
   data: [],
   loading: false,
   error: null,
 };
 
 const dataSlice = createSlice({
-  name: "data",
+  name: EPaths.PROPERTIES,
   initialState,
   reducers: {
     dataRequest: (state) => {
@@ -39,6 +40,7 @@ const dataSlice = createSlice({
       state.error = null;
     },
     dataSuccess: (state, action: PayloadAction<DataItem[]>) => {
+      //@ts-ignore
       state.data = action.payload;
       state.loading = false;
       state.error = null;

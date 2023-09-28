@@ -21,7 +21,7 @@ import {
 const Property = () => {
   const { id } = useParams();
   const { data } = useSelector((state: RootState) => state);
-  console.log(typeof id);
+
   const {
     title,
     description,

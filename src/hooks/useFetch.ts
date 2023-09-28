@@ -1,24 +1,13 @@
-import { PayloadAction } from "@reduxjs/toolkit";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { EPaths } from "../types";
 import { bookingSuccess } from "../app/store/bookingsSlice";
-import {
-  dataFailure,
-  DataItem,
-  dataRequest,
-  dataSuccess,
-} from "../app/store/dataSlice";
+import { dataFailure, dataRequest, dataSuccess } from "../app/store/dataSlice";
 import { reviewSuccess } from "../app/store/reviewSlice";
+import { RootState } from "../app/store/store";
 import { userSuccess } from "../app/store/usersSlice";
 
-export enum EPaths {
-  PROPERTIES = "properties",
-  REVIEWS = "reviews",
-  USERS = "users",
-  BOOKINGS = "bookings",
-}
-
-const getSuccessAction = <T>(path: EPaths) => {
+const getSuccessAction = (path: EPaths) => {
   switch (path) {
     case EPaths.PROPERTIES:
       return dataSuccess;
@@ -29,12 +18,15 @@ const getSuccessAction = <T>(path: EPaths) => {
     case EPaths.BOOKINGS:
       return bookingSuccess;
     default:
-      return () => {};
+      return dataSuccess;
   }
 };
 
-export const useFetch = (path: EPaths, id?: string) => {
+export const useFetch = <T>(path: EPaths, id?: string) => {
   const dispatch = useDispatch();
+  const state: T = useSelector((state: RootState) => state[path]);
+
+  console.log("This is state: " + state);
 
   useEffect(() => {
     dispatch(dataRequest());
@@ -48,5 +40,5 @@ export const useFetch = (path: EPaths, id?: string) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { getSuccessAction };
+  return { ...state };
 };
