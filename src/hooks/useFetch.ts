@@ -24,21 +24,31 @@ const getSuccessAction = (path: EPaths) => {
 
 export const useFetch = <T>(path: EPaths, id?: string) => {
   const dispatch = useDispatch();
-  const state: T = useSelector((state: RootState) => state[path]);
 
-  console.log("This is state: " + state);
+  const store: T = useSelector((state: RootState) => state[path]);
 
   useEffect(() => {
     dispatch(dataRequest());
 
+    // console.log(dataWithId + "dataWithId");
+
     const dataSuccessAction = getSuccessAction(path);
 
-    fetch(`${process.env.REACT_APP_API_URL}/${path}${id ? `/${id}` : ""}`)
-      .then((response) => response.json())
-      .then((data) => dispatch(dataSuccessAction(data)))
-      .catch(() => dispatch(dataFailure("Failed to fetch dataaa")));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    let URL = `${process.env.REACT_APP_API_URL}/${path}`;
+    if (id) {
+      URL += `/${id}`;
+    }
 
-  return { ...state };
+    console.log(URL);
+
+    fetch(URL)
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch(dataSuccessAction(data));
+        console.log(data);
+      })
+      .catch((e) => dispatch(dataFailure("Failed to fetch data: " + e)));
+  }, [dispatch, id, path]);
+
+  return { ...store };
 };

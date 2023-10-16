@@ -24,12 +24,12 @@ const reducers = combineReducers({
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
+
 const store = configureStore({
   reducer: persistedReducer,
   middleware: [...getDefaultMiddleware({ thunk: false })],
 });
 const persistor = persistStore(store);
-console.log(persistor);
 
 export { store, persistor, reducers };
 

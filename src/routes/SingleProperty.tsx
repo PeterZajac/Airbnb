@@ -20,7 +20,7 @@ import {
 
 const Property = () => {
   const { id } = useParams();
-  const { data } = useSelector((state: RootState) => state);
+  const { data } = useSelector((state: RootState) => state.properties);
 
   const {
     title,
@@ -33,7 +33,7 @@ const Property = () => {
     amenities,
     host,
     images,
-  } = data.find((i: DataItem) => i.id === parseInt(id ?? ""));
+  } = data?.find((i: DataItem) => i.id === parseInt(id ?? ""));
 
   return (
     <>

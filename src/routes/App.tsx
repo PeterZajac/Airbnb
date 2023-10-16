@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { DataItem, DataState } from "../app/store/dataSlice";
 import Header from "../components/Header";
 import SingleProperty from "../components/SingleProperty";
@@ -9,9 +8,6 @@ function App() {
   const { data, loading, error } = useFetch<DataState<DataItem>>(
     EPaths.PROPERTIES
   );
-
-  const state = useSelector((state) => state);
-  console.log(state);
 
   if (loading) {
     return <div>Loading...</div>;
